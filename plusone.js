@@ -6,38 +6,40 @@ var plusOne = function(digits) {
         digits = Number(digits.join("")) + 1;
         digits = String(digits).split("");
     } else {
-        let pointInit = Math.round((digits.length - 1) / 2);
+        let pointInit = Math.round(((digits.length - 1) / 2) - 1);
         let pointFinal = digits.length - 1;
-        let flag = pointFinal - pointInit;
+        let tamArr = pointFinal - pointInit;
         let arr = [];
 
-        while(true) {
-            if((arr.length - 1) < flag) {
-                arr.push(digits[pointInit]);
-                pointInit++;
-            } if((arr.length - 1) == flag) {
-                break;
-            }
+        // Se o tamanho da array ainda for maior que 16, divide a diferença por 2
+        if(tamArr > 16) {
+            pointInit = Math.round((pointInit + pointFinal) / 2);
+            tamArr = pointFinal - pointInit;
+        }
+
+        for(pointInit; pointInit < digits.length; pointInit++) {
+            arr.push(digits[pointInit]);
         }
 
         arr = Number(arr.join("")) + 1;
         arr = String(arr).split("");
 
-        for(pointFinal; pointFinal > flag; pointFinal--) {
-            if(pointFinal > arr.length - 1) {
-                digits[pointFinal] = arr[flag];
-                flag--;
-            } else {
-                break;
-            }
+        while(tamArr != 0) {
+            digits[pointFinal] = arr[tamArr];
+            tamArr--;
+            pointFinal--;
+        }
+
+        if(digits[digits.length - 1] == undefined) {
+            digits.pop();
         }
     }
 
     return digits;
 }
 
-var result = plusOne([6,1,4,5,3,9,0,1,9,5,1,8,6,7,0,5,5,4,3]);
-
+var result = plusOne([5,9,0,8,4,0,2,3,5,5,7,0,0,3,1,3,7,2,4,8,8,5,0,6,1,1,2]);
+    
 console.log(result);
 // Result:          [6,1,4,5,3,9,0,1,9,5,1,8,6,7,0,5,5,4,4]
 
