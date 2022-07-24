@@ -1,1 +1,1 @@
-# Resolução do exercício "Plus One" do LeetCode
+# Resolução do exercício de lógica "Plus One" do LeetCode [NÃO RESOLVIDO]
